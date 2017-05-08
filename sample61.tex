@@ -1,0 +1,386 @@
+%%
+%% Beginning of file 'sample61.tex'
+%%
+%% Modified 2016 September
+%%
+%% This is a sample manuscript marked up using the
+%% AASTeX v6.1 LaTeX 2e macros.
+%%
+%% AASTeX is now based on Alexey Vikhlinin's emulateapj.cls 
+%% (Copyright 2000-2015).  See the classfile for details.
+
+%% AASTeX requires revtex4-1.cls (http://publish.aps.org/revtex4/) and
+%% other external packages (latexsym, graphicx, amssymb, longtable, and epsf).
+%% All of these external packages should already be present in the modern TeX 
+%% distributions.  If not they can also be obtained at www.ctan.org.
+
+%% The first piece of markup in an AASTeX v6.x document is the \documentclass
+%% command. LaTeX will ignore any data that comes before this command. The 
+%% documentclass can take an optional argument to modify the output style.
+%% The command below calls the preprint style  which will produce a tightly 
+%% typeset, one-column, single-spaced document.  It is the default and thus
+%% does not need to be explicitly stated.
+%%
+%%
+%% using aastex version 6.1
+\documentclass{aastex61}
+
+%% The default is a single spaced, 10 point font, single spaced article.
+%% There are 5 other style options available via an optional argument. They
+%% can be envoked like this:
+%%
+%% \documentclass[argument]{aastex61}
+%% 
+%% where the arguement options are:
+%%
+%%  twocolumn   : two text columns, 10 point font, single spaced article.
+%%                This is the most compact and represent the final published
+%%                derived PDF copy of the accepted manuscript from the publisher
+%%  manuscript  : one text column, 12 point font, double spaced article.
+%%  preprint    : one text column, 12 point font, single spaced article.  
+%%  preprint2   : two text columns, 12 point font, single spaced article.
+%%  modern      : a stylish, single text column, 12 point font, article with
+%% 		  wider left and right margins. This uses the Daniel
+%% 		  Foreman-Mackey and David Hogg design.
+%%
+%% Note that you can submit to the AAS Journals in any of these 6 styles.
+%%
+%% There are other optional arguments one can envoke to allow other stylistic
+%% actions. The available options are:
+%%
+%%  astrosymb    : Loads Astrosymb font and define \astrocommands. 
+%%  tighten      : Makes baselineskip slightly smaller, only works with 
+%%                 the twocolumn substyle.
+%%  times        : uses times font instead of the default
+%%  linenumbers  : turn on lineno package.
+%%  trackchanges : required to see the revision mark up and print its output
+%%  longauthor   : Do not use the more compressed footnote style (default) for 
+%%                 the author/collaboration/affiliations. Instead print all
+%%                 affiliation information after each name. Creates a much
+%%                 long author list but may be desirable for short author papers
+%%
+%% these can be used in any combination, e.g.
+%%
+%% \documentclass[twocolumn,linenumbers,trackchanges]{aastex61}
+
+%% AASTeX v6.* now includes \hyperref support. While we have built in specific
+%% defaults into the classfile you can manually override them with the
+%% \hypersetup command. For example,
+%%
+%%\hypersetup{linkcolor=red,citecolor=green,filecolor=cyan,urlcolor=magenta}
+%%
+%% will change the color of the internal links to red, the links to the
+%% bibliography to green, the file links to cyan, and the external links to
+%% magenta. Additional information on \hyperref options can be found here:
+%% https://www.tug.org/applications/hyperref/manual.html#x1-40003
+
+%% If you want to create your own macros, you can do so
+%% using \newcommand. Your macros should appear before
+%% the \begin{document} command.
+%%
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand\aastex{AAS\TeX}
+\newcommand\latex{La\TeX}
+
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{amsmath}
+
+%% Reintroduced the \received and \accepted commands from AASTeX v5.2
+%\received{July 1, 2016}
+%\revised{September 27, 2016}
+%\accepted{\today}
+%% Command to document which AAS Journal the manuscript was submitted to.
+%% Adds "Submitted to " the arguement.
+\submitjournal{ApJ}
+
+%% Mark up commands to limit the number of authors on the front page.
+%% Note that in AASTeX v6.1 a \collaboration call (see below) counts as
+%% an author in this case.
+%
+%\AuthorCollaborationLimit=3
+%
+%% Will only show Schwarz, Muench and "the AAS Journals Data Scientist 
+%% collaboration" on the front page of this example manuscript.
+%%
+%% Note that all of the author will be shown in the published article.
+%% This feature is meant to be used prior to acceptance to make the
+%% front end of a long author article more manageable. Please do not use
+%% this functionality for manuscripts with less than 20 authors. Conversely,
+%% please do use this when the number of authors exceeds 40.
+%%
+%% Use \allauthors at the manuscript end to show the full author list.
+%% This command should only be used with \AuthorCollaborationLimit is used.
+
+%% The following command can be used to set the latex table counters.  It
+%% is needed in this document because it uses a mix of latex tabular and
+%% AASTeX deluxetables.  In general it should not be needed.
+%\setcounter{table}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% The following section outlines numerous optional output that
+%% can be displayed in the front matter or as running meta-data.
+%%
+%% If you wish, you may supply running head information, although
+%% this information may be modified by the editorial offices.
+\shorttitle{Detecting structures of astronomical sources}
+\shortauthors{Fan et al.}
+%%
+%% You can add a light gray and diagonal water-mark to the first page 
+%% with this command:
+% \watermark{text}
+%% where "text", e.g. DRAFT, is the text to appear.  If the text is 
+%% long you can control the water-mark size with:
+%  \setwatermarkfontsize{dimension}
+%% where dimension is any recognized LaTeX dimension, e.g. pt, in, etc.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% This is the end of the preamble.  Indicate the beginning of the
+%% manuscript itself with \begin{document}.
+
+\begin{document}
+
+\title{Detecting structures of astronomical sources using graph-based seeded region growing}
+
+%% LaTeX will automatically break titles if they run longer than
+%% one line. However, you may use \\ to force a line break if
+%% you desire. In v6.1 you can include a footnote in the title.
+
+%% A significant change from earlier AASTEX versions is in the structure for 
+%% calling author and affilations. The change was necessary to implement 
+%% autoindexing of affilations which prior was a manual process that could 
+%% easily be tedious in large author manuscripts.
+%%
+%% The \author command is the same as before except it now takes an optional
+%% arguement which is the 16 digit ORCID. The syntax is:
+%% \author[xxxx-xxxx-xxxx-xxxx]{Author Name}
+%%
+%% This will hyperlink the author name to the author's ORCID page. Note that
+%% during compilation, LaTeX will do some limited checking of the format of
+%% the ID to make sure it is valid.
+%%
+%% Use \affiliation for affiliation information. The old \affil is now aliased
+%% to \affiliation. AASTeX v6.1 will automatically index these in the header.
+%% When a duplicate is found its index will be the same as its previous entry.
+%%
+%% Note that \altaffilmark and \altaffiltext have been removed and thus 
+%% can not be used to document secondary affiliations. If they are used latex
+%% will issue a specific error message and quit. Please use multiple 
+%% \affiliation calls for to document more than one affiliation.
+%%
+%% The new \altaffiliation can be used to indicate some secondary information
+%% such as fellowships. This command produces a non-numeric footnote that is
+%% set away from the numeric \affiliation footnotes.  NOTE that if an
+%% \altaffiliation command is used it must come BEFORE the \affiliation call,
+%% right after the \author command, in order to place the footnotes in
+%% the proper location.
+%%
+%% Use \email to set provide email addresses. Each \email will appear on its
+%% own line so you can put multiple email address in one \email call. A new
+%% \correspondingauthor command is available in V6.1 to identify the
+%% corresponding author of the manuscript. It is the author's responsibility
+%% to make sure this name is also in the author list.
+%%
+%% While authors can be grouped inside the same \author and \affiliation
+%% commands it is better to have a single author for each. This allows for
+%% one to exploit all the new benefits and should make book-keeping easier.
+%%
+%% If done correctly the peer review system will be able to
+%% automatically put the author and affiliation information from the manuscript
+%% and save the corresponding author the trouble of entering it by hand.
+
+\correspondingauthor{Minjie Fan}
+\email{mjfan@ucdavis.edu}
+
+\author{Minjie Fan}
+\affiliation{Department of Statistics \\
+University of California, Davis\\
+One Shields Avenue \\
+Davis, CA 95616, USA}
+
+\author{Vinay L. Kashyap}
+\affiliation{Harvard-Smithsonian Center for Astrophysics \\
+60 Garden Street \\
+Cambridge, MA 02138, USA}
+
+\author{Andreas Zezas}
+\affiliation{Physics Department \\
+University of Crete \\
+P.O. Box 2208, GR-710 03 \\
+Heraklion, Crete, Greece}
+
+\author{David A. van Dyk}
+\affiliation{Statistics Section, Department of Mathematics\\
+Imperial College London \\
+180 Queen's Gate \\
+London, SW7 2AZ, UK
+}
+
+\author{Thomas C.M. Lee}
+\affiliation{Department of Statistics \\
+University of California, Davis\\
+One Shields Avenue \\
+Davis, CA 95616, USA}
+
+%% Note that the \and command from previous versions of AASTeX is now
+%% depreciated in this version as it is no longer necessary. AASTeX 
+%% automatically takes care of all commas and "and"s between authors names.
+
+%% AASTeX 6.1 has the new \collaboration and \nocollaboration commands to
+%% provide the collaboration status of a group of authors. These commands 
+%% can be used either before or after the list of corresponding authors. The
+%% argument for \collaboration is the collaboration identifier. Authors are
+%% encouraged to surround collaboration identifiers with ()s. The 
+%% \nocollaboration command takes no argument and exists to indicate that
+%% the nearby authors are not part of surrounding collaborations.
+
+%% Mark off the abstract in the ``abstract'' environment. 
+\begin{abstract}
+
+This example manuscript is intended to serve as a tutorial and template for
+authors to use when writing their own AAS Journal articles. The manuscript
+includes a history of \aastex\ and documents the new features in the
+previous version, 6.0, as well as the new features in version 6.1. This
+manuscript includes many figure and table examples to illustrate these new
+features.  Information on features not explicitly mentioned in the article
+can be viewed in the manuscript comments or more extensive online
+documentation. Authors are welcome replace the text, tables, figures, and
+bibliography with their own and submit the resulting manuscript to the AAS
+Journals peer review system.  The first lesson in the tutorial is to remind
+authors that the AAS Journals, the Astrophysical Journal (ApJ), the
+Astrophysical Journal Letters (ApJL), and Astronomical Journal (AJ), all
+have a 250 word limit for the abstract.  If you exceed this length the
+Editorial office will ask you to shorten it.
+
+\end{abstract}
+
+%% Keywords should appear after the \end{abstract} command. 
+%% See the online documentation for the full list of available subject
+%% keywords and the rules for their use.
+\keywords{editorials, notices --- 
+miscellaneous --- catalogs --- surveys}
+
+%% From the front matter, we move on to the body of the paper.
+%% Sections are demarcated by \section and \subsection, respectively.
+%% Observe the use of the LaTeX \label
+%% command after the \subsection to give a symbolic KEY to the
+%% subsection for cross-referencing in a \ref command.
+%% You can use LaTeX's \ref and \label commands to keep track of
+%% cross-references to sections, equations, tables, and figures.
+%% That way, if you change the order of any elements, LaTeX will
+%% automatically renumber them.
+
+%% We recommend that authors also use the natbib \citep
+%% and \citet commands to identify citations.  The citations are
+%% tied to the reference list via symbolic KEYs. The KEY corresponds
+%% to the KEY in the \bibitem in the reference list below. 
+
+\section{Introduction} \label{sec:intro}
+
+\section{Methodology} \label{sec:method}
+
+\subsection{Statistical Model}
+
+Suppose that the observations are photons located in a bounded domain $D \subset \mathbb{R}^2$ with coordinates $\mathbf{x}_i=:(x_{1i}, x_{2i}), i=1, \cdots, n$. They are assumed to originate from one of several sources or the background, where the former can be either point or extended sources. The exact origin of each photon, the number of sources, their locations and
+intensities are all unknown. We are particularly interested in the case when point sources lie within an extended source, since this is a challenging task for existing methods.  Unlike \citet{Jones-15}, the method to be proposed in this paper depends on the spatial information of photons, i.e., their locations only.
+
+For simplicity, we assume that photons from the background are distributed uniformly in $D$. We also assume that photons from each source are distributed uniformly in the source by ignoring the point-spread function (PSF). Hence, the observed photons can be regarded as a realization of an inhomogeneous Poisson point process\footnote{An inhomogeneous Poisson point process with an intensity function $\lambda(\mathbf{x})$ is characterized by the following stochastic property:
+for any collection of disjoint subsets of $D$, denoted by $B_j, j=1,\cdots, m$, $\#(B_j)$'s are independent random Poisson variables with means $\int_{B_j}\lambda(\mathbf{x})d\mathbf{x}, j=1,\cdots, m$,
+where $\#(B_j)$ denotes the number of points in $B_j$.} 
+with a piecewise constant intensity function. Let $\lambda(\mathbf{x})\geq 0$, where $\mathbf{x}\in D$, denote the intensity function\footnote{The intensity function has to be integrable over $D$,
+i.e., $\int_D\lambda(\mathbf{x})d\mathbf{x}<\infty$.}. 
+As a piecewise constant function, it can be represented as $\lambda(\mathbf{x})=\sum_{k=0}^K \lambda_k \mathbbm{1}_{S_k}(\mathbf{x})$, where
+$S_k$'s are disjoint subsets of $D$ such that $\bigcup_{k=0}^K S_k = D$, and $\lambda_k\geq 0$ for all $k$. Besides, $K$ denotes the number of sources, $k=0$ 
+corresponds to the background and $k=1,\cdots, K$ correspond to the $K$ sources. Then $S_k$'s characterize the boundaries of the sources and the background, and $\lambda_k$'s measure their intensities. 
+
+Let $(\mathbf{X}_1, \cdots, \mathbf{X}_n, N)$ denote the inhomogeneous Poisson process, where $\mathbf{X}_i$ is the location of the $i$-th photon and $N$ is the number of photons, which are all random. Given the observations $(\mathbf{x}_1, \cdots, \mathbf{x}_n, n)$, the probability density function of the inhomogeneous Poisson process is 
+\begin{eqnarray*}
+f(\mathbf{X}_1=\mathbf{x}_1, \cdots, \mathbf{X}_n=\mathbf{x}_n, N=n) & = & f(\mathbf{X}_1=\mathbf{x}_1, \cdots, \mathbf{X}_n=\mathbf{x}_n | N=n)f(N=n)\\
+& = & \frac{\prod_{i=1}^n \lambda(\mathbf{x}_i)}{\left( \int_D \lambda(\mathbf{x}) d\mathbf{x} \right) ^n} \frac{\exp\left({-\int_D\lambda(\mathbf{x})d\mathbf{x}} \right)\left(\int_D\lambda(\mathbf{x})d\mathbf{x}\right)^n}{n!}\\
+& = & \frac{\prod_{i=1}^n \lambda(\mathbf{x}_i)\exp\left({-\int_D\lambda(\mathbf{x})d\mathbf{x}} \right)}{n!}.
+\end{eqnarray*}
+Write $\mathbf{S}=(S_0, \cdots, S_K)$ and $\bm{\lambda}=(\lambda_0, \cdots, \lambda_K)$. Then the log-likelihood function is
+$$l(K, \mathbf{S}, \bm{\lambda}|\mathbf{x}_1, \cdots, \mathbf{x}_n, n)=:\log{f}=\sum \limits_{i=1}^n \log{\lambda(\mathbf{x}_i)}-\int_D\lambda(\mathbf{x})d\mathbf{x}-\log{n!}.$$
+As a function of the model parameters given the data, it tells us what values of the parameters are supported by the data. The maximum likelihood estimates (MLE) of the parameters are the parameter values that maximize the log-likelihood.
+Plugging the expression of $\lambda(\mathbf{x})$ as a piecewise constant function into $l$, we have
+$$l=\sum \limits_{k=0, \#(S_k)\neq 0}^K \#(S_k) \log {\lambda_k}-\sum_{k=0}^K |S_k|\lambda_k-\log{n!},$$
+where $\#(S_k)$ and $|S_k|$ denote the number of photons in $S_k$ and the area of $S_k$, respectively. When $\#(S_k)=0$, the summand $\#(S_k) \log {\lambda_k}$ is excluded from the sum.
+For fixed $S_k$'s, $l$ is maximized when
+$$\lambda_k=\widehat{\lambda}_k:=\#(S_k)/|S_k|.$$
+Plugging $\widehat{\lambda}_k$'s into $l$, we reduce the log-likelihood to a profile log-likelihood of $S_k$, i.e.,
+\begin{equation}\label{eqn:prof_log_lik}
+l_{\rm profile}(K, \mathbf{S}|\mathbf{x}_1, \cdots, \mathbf{x}_n, n)=\sum \limits_{k=0, \#(S_k)\neq 0}^K \#(S_k) \log \left\{\#(S_k)/|S_k|\right\}-n-\log{n!}.
+\end{equation}
+Another way of modeling the data is by treating them as a mixture of uniform distributions, from which the same form of profile log-likelihood can be derived. 
+\citet{Allard-97} considered a special case with only one source and the background.
+
+\subsection{Model Selection Using Bayesian Information Criterion}
+Usually the number of sources $K$ is unknown, and it cannot be estimated by maximizing the profile log-likelihood (\ref{eqn:prof_log_lik}) since the profile log-likelihood can be made arbitrary large as $K$ increases.
+One way to resolve this issue is to add a penalty term to the profile log-likelihood to suitably penalize the complexity of the model. \citet{Aue-11} used information theoretic model selection methods such as the Akaike information criterion (AIC), the Bayesian information criterion (BIC), and the minimum description length (MDL) principle to derive such a penalty; the latter two were shown to be consistent for image segmentation.
+However, the MDL principle is not well-defined in our case since there seems no way of encoding $S_k$'s in a continuous space without assuming any particular shapes for $S_k$'s. Thus, we use the BIC for model selection, which is defined as
+$${\rm BIC}(K, \mathbf{S})=-2l_{\rm profile}(K, \mathbf{S}|\mathbf{x}_1, \cdots, \mathbf{x}_n, n)+p\log n,$$
+where $p$ is the number of free/independent parameters in the model. The BIC estimates for $(K, \mathbf{S})$ are given by
+$$(\widehat{K}, \widehat{\mathbf{S}})=\underset{K\leq K_{\rm max}}{\operatorname{arg\, max}}~{\rm BIC}(K, \mathbf{S}),$$
+where $K_{\rm max}$ is the maximally allowed number of sources.
+This is apparently a non-parametric model and hence $p$ is not well-defined. Similar to \citet{Aue-11}, we can approximate the model by a parametric one through assuming a specific shape for $S_k$'s.
+For example, when the sources are close to ellipse-shaped, $p=6K+1$ because 
+the number of parameters associated with each source is $6$, and the background intensity is counted as one parameter. Thus, the BIC becomes
+$${\rm BIC}(K, \mathbf{S})=-2\log f(K, \mathbf{S})+(6K+1)\log n.$$
+ Another possible choice is specifying $p=K+1$, the number of sources and the background, which to some extent reflects the complexity
+of the model \citep{Magnussen-06}, but totally ignores the shapes of the sources.
+
+\subsection{Voronoi Tessellation}
+Without additional constraints on $S_k$'s, the estimates of $S_k$'s obtained by minimizing the BIC are not well-defined for the following reasons: (i) $S_k$ with $\#(S_k)=0$ can have arbitrary shape 
+since it does not contribute to the BIC; and (ii) the BIC can be arbitrarily small by shrinking the areas of $S_k$'s towards zero since $|S_k|$'s are on the denominator. Thus, we consider a restricted class of $S_k$'s such that each of them consists of the Voronoi cells derived from the Voronoi tessellation of the data. In this case, each $S_k$ contains at least one photon.
+
+% ref: galaxyVoronoi
+The Voronoi tessellation of the observed photons uniquely partitions $D$ into $n$ convex cells, denoted by $C_i, i=1, \cdots, n$, such that cell $C_i$ contains one and only one photon, say $\mathbf{x}_i$, and consists of all locations in $S$ closer to photon $\mathbf{x}_i$ than to any other photons. These cells are called Voronoi cells, and $\mathbf{x}_i$ is called the nucleus of $C_i$. To avoid border effects, we restrict the tessellation to Voronoi cells the vertices of which are all in $D$. Based on the Voronoi tessellation, \citet{Barr-10} introduced the Voronoi estimator $\widehat{\lambda}^{\rm V}(\mathbf{y})=:1/|C_i|$ for any location $\mathbf{y} \in C_i$. They showed that under certain conditions, the Voronoi estimator is approximately unbiased, and its sampling distribution is approximately inverse Gamma\footnote{The probability density function of an inverse Gamma
+distribution is $\frac{\beta^{\alpha}}{\Gamma(\alpha)}x^{-\alpha-1}\exp \left( -\frac{\beta}{x} \right)$, where $x>0$, $\alpha$ and $\beta$ are the shape and rate parameters, respectively, and $\Gamma(\cdot)$ denotes the Gamma function.}; these results are further verified through simulation studies.
+
+\subsection{Graph Segmentation Using Seeded Region Growing}
+The dual graph of the Voronoi tessellation is called the Delaunay triangulation. Figure ? displays. Its vertices are exactly the photons, and its edges connect pairs of the Voronoi cells. 
+Vertex $\mathbf{x}_i$ can be assigned the value of the Voronoi estimator, denoted by $\widehat{\lambda}_i^{\rm V}$, that estimates the intensity in Voronoi cell $C_i$. Based on the graph constructed by the Delaunay triangulation, 
+the problem of estimating $S_k$'s is equivalent to that of graph segmentation, i.e., partitioning the graph into subgraphs such that the Voronoi cells corresponding to each of them form a source or the background. Since
+we have assumed that the intensity function is piecewise constant, the vertices in each subgraph share similar values. Besides, the values in the subgraphs of the sources are significantly larger than those of the background.
+
+A distinct advantage of treating this problem as graph segmentation is that we implicitly impose the constraint that each $C_i$ is connected. Traditional image segmentation\footnote{Image segmentation is the process of separating an image into several regions such that each region is composed of connected pixels with similar characteristics, such as similar pixel values.} 
+techniques can be adapted to the graph and used here. In particular, we propose a graph-based seeded region growing (SRG) method, which is very similar to the original SRG used for images except that the concept of ``neighbors" is determined by the edges of the graph instead of neighboring pixels. The original SRG was proposed in \citet{Adams-94} and extended to several variants to deal with more complicated cases in \citet{Fan-14}. The graph-based SRG starts with identifying, either manually or automatically, a set of seeds from the graph. Each seed can be a single vertex or a set of connected vertices. For the moment, we assume that the seeds are perfectly specified, i.e., there is one and only one seed in each true source or the true background. The details of seed specification in practice are described in Section \ref{sec:seed_spec}. Then the graph-based SRG grows these seeds into subgraphs by successively adding neighboring vertices to them. More specifically, at each time step, the method selects the pair of a growing subgraph $S$ and one of its neighboring vertex $i$ such that the following criterion is minimized
+\begin{equation}\label{eqn: min_criterion}
+\delta(i, S)=\left \lvert \log \widehat{\lambda}_i^{\rm V} - \log\{\#(S)/|S|\} \right \rvert,
+\end{equation}
+where we do not distinguish between the subgraph and its corresponding Voronoi cells so that the operators $\#(\cdot)$ and $|\cdot|$ are still meaningful for $S$. This criterion compares the  
+the estimated log intensities of the subgraph and the vertex because taking the logarithm can magnify the contrast. Then the vertex in the pair with the smallest difference is added to the corresponding subgraph.
+The graph-based SRG finishes when all the vertices of the graph are assigned to one and only one subgraph. These subgraphs give the estimated $S_k$'s.
+
+\section{Computational Details}
+\subsection{Seed Specification}\label{sec:seed_spec}
+We have assumed an ideal case for seed specification where there is one and only one seed in each true source or the true background. However, such perfect seed specification is not always possible without some source detection algorithm or human interaction. Nonetheless, we provide a simple but practical method for seed specification following \citet{Lee-00}. More specifically, we first overlay a regular grid with appropriate size on the domain $D$. A too dense grid would lead to an insufficient number of photons for seed specification, and a too sparse grid would miss some of the seeds that are supposed to be specified. Then for each grid point, we assign to the corresponding seed its closest $s$ photons in terms of the Euclidean distance that have not been assigned. The seed size $s$ can be increased to stabilize the initial estimates of the seed/growing subgraph intensities, especially when the signal-to-noise ratio (i.e., the ratio between the intensities of a source and the background) is low. Again, a too large $s$ would lead to an insufficient number of photons for seed specification.
+
+The price for increasing $s$ is that some of the seeds may fall on true source boundaries and adversely affect subsequent processing. To overcome this, we take a further step of seed rejection. For a planar homogeneous Poisson point process, let $A$ denote the area of a typical cell.
+Then $\mbox{E}(A)=1/\lambda$ and $\mbox{Std}(A)\approx 0.53/\lambda$ \citep[Chapter 4.2]{Moller-94}. If a seed does not fall on the boundary, it can be regarded as a part of the Voronoi tessellation of a homogeneous Poisson point process. The area 
+of the cells in the seed should vary to the extent controlled by the standard deviation. Specifically, the area has a very high probability of falling within the interval $1/\hat{\lambda}\pm\alpha \times 0.53/\hat{\lambda}$, 
+where $1/\hat{\lambda}$ is the mean area of the cells in the seed, and $\alpha$ is a factor determining the width of the interval, which is specified as $2$ in our case.
+Thus, the range of the area has a very high probability of being less than or equal to $2\alpha \times 0.53/\hat{\lambda}$. This will be used as an ad-hoc threshold for the range of the area of the cells in the seed. If the actual range is larger than the estimated threshold, we reject the seed. It is worth mentioning that range is a robust estimator of the variability of the area if there are only a small number of cells in the seed.
+
+Point sources.
+
+\subsection{Subgraph Merging}
+
+\newpage
+\bibliography{refs}
+\bibliographystyle{aasjournal}
+
+%% This command is needed to show the entire author+affilation list when
+%% the collaboration and author truncation commands are used.  It has to
+%% go at the end of the manuscript.
+%\allauthors
+
+%% Include this line if you are using the \added, \replaced, \deleted
+%% commands to see a summary list of all changes at the end of the article.
+%\listofchanges
+
+\end{document}
+
+% End of file `sample61.tex'.
